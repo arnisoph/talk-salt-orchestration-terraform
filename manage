@@ -1,0 +1,20 @@
+#!/bin/bash
+
+cmd=$1
+
+#export TF_LOG=1
+
+cd config/
+
+case ${cmd} in
+show)
+  terraform show
+;;
+*)
+  terraform ${cmd} \
+    -var "do_token=${DO_PAT}" \
+    -var "pub_key=${HOME}/.ssh/id_rsa_inovexdemo.pub" \
+    -var "pvt_key=${HOME}/.ssh/id_rsa_inovexdemo" \
+    -var "ssh_fingerprint=6c:cb:51:bc:51:5f:c7:70:9f:11:b9:73:97:a9:c3:81"
+;;
+esac
