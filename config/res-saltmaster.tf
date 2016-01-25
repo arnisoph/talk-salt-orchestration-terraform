@@ -11,7 +11,7 @@ resource "digitalocean_droplet" "saltmaster" {
   ]
 
   provisioner "local-exec" {
-    command = "sleep 60"
+    command = "sleep 120"
   }
 
   connection {
@@ -28,7 +28,7 @@ resource "digitalocean_droplet" "saltmaster" {
 
   provisioner "remote-exec" {
     inline = [
-      "source /tmp/terraform-provision.sh 127.0.0.1"
+      "chmod +x /tmp/terraform-provision.sh && /tmp/terraform-provision.sh 127.0.0.1"
     ]
   }
 }

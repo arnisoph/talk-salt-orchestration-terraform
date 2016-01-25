@@ -1,5 +1,5 @@
 resource "digitalocean_droplet" "mw" {
-  count = 10
+  count = 0
   image = "centos-7-0-x64"
   name = "mw${count.index}"
   region = "ams3"
@@ -16,7 +16,7 @@ resource "digitalocean_droplet" "mw" {
   ]
 
   provisioner "local-exec" {
-    command = "sleep 60"
+    command = "sleep 120"
   }
 
   connection {
@@ -34,7 +34,7 @@ resource "digitalocean_droplet" "mw" {
 
   provisioner "remote-exec" {
     inline = [
-      "source /tmp/terraform-provision.sh ${digitalocean_droplet.saltmaster.ipv4_address_private}"
+      "chmod +x /tmp/terraform-provision.sh && /tmp/terraform-provision.sh ${digitalocean_droplet.saltmaster.ipv4_address_private}"
     ]
   }
 }
