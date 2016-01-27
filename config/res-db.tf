@@ -1,8 +1,8 @@
 resource "digitalocean_droplet" "db" {
-  count = 0
+  count = 1
   image = "centos-7-0-x64"
   name = "db${count.index}"
-  region = "ams3"
+  region = "fra1"
   size = "1gb"
   private_networking = true
   ipv6 = true
@@ -15,7 +15,7 @@ resource "digitalocean_droplet" "db" {
   ]
 
   provisioner "local-exec" {
-    command = "sleep 120"
+    command = "sleep 180"
   }
 
   connection {

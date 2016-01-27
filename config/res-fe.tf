@@ -2,7 +2,7 @@ resource "digitalocean_droplet" "fe" {
   count = 0
   image = "centos-7-0-x64"
   name = "fe${count.index}"
-  region = "ams3"
+  region = "fra1"
   size = "1gb"
   private_networking = true
   ipv6 = true
@@ -15,7 +15,7 @@ resource "digitalocean_droplet" "fe" {
   ]
 
   provisioner "local-exec" {
-    command = "sleep 120"
+    command = "sleep 180"
   }
 
   connection {

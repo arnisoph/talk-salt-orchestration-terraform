@@ -2,7 +2,7 @@ resource "digitalocean_droplet" "saltmaster" {
   count = 1
   image = "centos-7-0-x64"
   name = "saltmaster${count.index}"
-  region = "ams3"
+  region = "fra1"
   size = "2gb"
   private_networking = true
   ipv6 = true
@@ -11,7 +11,7 @@ resource "digitalocean_droplet" "saltmaster" {
   ]
 
   provisioner "local-exec" {
-    command = "sleep 120"
+    command = "sleep 300"
   }
 
   connection {
@@ -19,6 +19,7 @@ resource "digitalocean_droplet" "saltmaster" {
       type = "ssh"
       key_file = "${var.pvt_key}"
       timeout = "5m"
+      agent = false
   }
 
   provisioner "file" {

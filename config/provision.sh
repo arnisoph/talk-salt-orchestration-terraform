@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -e
 
 master=$1
 
@@ -15,9 +15,10 @@ find /etc/yum.repos.d/ -type f -name '*.repo' -exec sed -i 's/mirrorlist=/#mirro
 yum install -q -y git screen
 
 wget -q https://raw.githubusercontent.com/saltstack/salt-bootstrap/stable/bootstrap-salt.sh -O /tmp/bootstrap-salt.sh
+chmod +x /tmp/bootstrap-salt.sh
 
 if [[ $(hostname) == saltmaster* ]]; then
-  source /tmp/bootstrap-salt.sh -M -Z -P -A ${master} git v2015.8.3 &> /tmp/vm-bootstrap.log
+  /tmp/bootstrap-salt.sh -M -Z -P -A ${master} git v2015.8.3 &> /tmp/vm-bootstrap.log
   git clone -q https://github.com/bechtoldt/talk-salt-orchestration.git /srv/salt
   cd /srv/salt/
   git submodule -q update --init --recursive .
@@ -27,5 +28,5 @@ if [[ $(hostname) == saltmaster* ]]; then
   sleep 10
   service salt-minion restart
 else
-  source /tmp/bootstrap-salt.sh -Z -P -A ${master} git v2015.8.3 &> /tmp/vm-bootstrap.log
+  /tmp/bootstrap-salt.sh -Z -P -A ${master} git v2015.8.3 &> /tmp/vm-bootstrap.log
 fi
