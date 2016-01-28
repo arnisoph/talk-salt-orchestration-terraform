@@ -14,9 +14,9 @@ resource "digitalocean_droplet" "db" {
     "digitalocean_droplet.saltmaster"
   ]
 
-  provisioner "local-exec" {
-    command = "sleep 180"
-  }
+  #provisioner "local-exec" {
+  #  command = "sleep 300"
+  #}
 
   connection {
       user = "root"

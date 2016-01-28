@@ -1,5 +1,5 @@
 resource "digitalocean_droplet" "fe" {
-  count = 0
+  count = 7
   image = "centos-7-0-x64"
   name = "fe${count.index}"
   region = "fra1"
@@ -15,7 +15,7 @@ resource "digitalocean_droplet" "fe" {
   ]
 
   provisioner "local-exec" {
-    command = "sleep 180"
+    command = "sleep 300"
   }
 
   connection {
